@@ -2,8 +2,18 @@ from fastapi import FastAPI, UploadFile, File, Query
 import pandas as pd
 import io
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Configuração do CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Permite requisições do frontend
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos os métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permite todos os headers
+)
 
 # Criar um dicionário de categorias automáticas para os gastos
 CATEGORIAS = {
